@@ -20,18 +20,23 @@ python sensors/azure_kinect_viewer.py
 
 - 查看且录制mkv数据
 ```
-python sensors/azure_kinect_recorder.py --output ~/test.mkv
+python sensors/azure_kinect_recorder.py --output ~/test.mkv #press 'space' to record
 # k4arecord a.mkv  # 使用kinect官方工具录制
 ```
 
-- mkv查看/mkv导出深度图和RGB图
+- mkv查看/mkv导出深度图和RGB图,(depth img and color img will be aligned)
 ```bash
-python sensors/azure_kinect_reader.py --input ~/test.mkv --output ~/test_out
+python sensors/azure_kinect_mkv_reader.py --input ~/test.mkv --output ~/test_out
 ```
 
 ## 重建
 ```
-python3 run_system.py ~/fu_out/config.json --make --register --refine --integrate
+python3 run_system.py --make --register --refine --integrate  ~/fu_out/config.json 
 ```
+note if you move the test_out to other path, you need modify the config in config.json
 
+```json
+    "path_dataset": "/home/bst/test_out",
+    "path_intrinsic": "/home/bst/test_out/intrinsic.json",
+```
 > http://www.open3d.org/docs/latest/tutorial/sensor/azure_kinect.html?highlight=kinect
